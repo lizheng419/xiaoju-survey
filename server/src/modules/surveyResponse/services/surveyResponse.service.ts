@@ -40,19 +40,17 @@ export class SurveyResponseService {
   }
 
   async getSurveyResponseTotalByPath(surveyPath: string) {
-    const data = await this.surveyResponseRepository.find({
+    return this.surveyResponseRepository.count({
       where: {
         surveyPath,
       },
     });
-    return (data || []).length;
   }
   async getSurveyResponseTotalByChannel({ channelId }) {
-    const data = await this.surveyResponseRepository.find({
+    return this.surveyResponseRepository.count({
       where: {
-        channelId: channelId,
+        channelId,
       },
     });
-    return (data || []).length;
   }
 }

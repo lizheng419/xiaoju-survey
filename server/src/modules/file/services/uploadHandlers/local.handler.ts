@@ -42,10 +42,6 @@ export class LocalHandler implements FileUploadHandler {
   }
 
   getUrl(key: string): string {
-    if (process.env.SERVER_ENV === 'local') {
-      const port = process.env.PORT || 3000;
-      return `http://localhost:${port}/${key}`;
-    }
     return `/${key}`;
   }
 }

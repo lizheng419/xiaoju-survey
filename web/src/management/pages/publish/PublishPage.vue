@@ -52,7 +52,8 @@ const mainChannel = computed(() => {
   let fullUrl = ''
 
   if (metaData.value) {
-    fullUrl = `${location.origin}/render/${(metaData.value as any).surveyPath}?t=${Date.now()}`
+    const renderBase = import.meta.env.DEV ? '/src/render' : '/render'
+    fullUrl = `${location.origin}${renderBase}/${(metaData.value as any).surveyPath}?t=${Date.now()}`
   }
 
   return { fullUrl }

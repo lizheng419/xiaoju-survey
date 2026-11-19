@@ -44,6 +44,49 @@ describe('DataStatisticService', () => {
     expect(service).toBeDefined();
   });
 
+  it('keeps stale cascader values instead of throwing', async () => {
+    jest.spyOn(surveyResponseRepository, 'findAndCount').mockResolvedValue([
+      [
+        {
+          data: { data1: 'missing,child' },
+          diffTime: 0,
+          createdAt: new Date(),
+        },
+      ] as any,
+      1,
+    ]);
+
+    const result = await service.getDataTable({
+      surveyId: 'survey1',
+      pageNum: 1,
+      pageSize: 10,
+      responseSchema: {
+        code: {
+          dataConf: {
+            dataList: [
+              {
+                field: 'data1',
+                title: '地区',
+                type: 'cascader',
+                cascaderData: {
+                  children: [
+                    {
+                      hash: 'known',
+                      text: '省',
+                      children: [{ hash: 'child', text: '市', children: [] }],
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+        },
+      } as any,
+    });
+
+    expect((result.listBody[0] as any).data1).toBe('missing-child');
+  });
+
   describe('getDataTable', () => {
     it('should return correct table data', async () => {
       const surveyId = '65afc62904d5db18534c0f78';

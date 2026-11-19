@@ -96,8 +96,9 @@ export class DataStatisticService {
           data[itemKey] = data[itemKey]
             ?.split(',')
             .map((v) => {
-              const text = optionTextMap[v]?.text || v;
-              optionTextMap = keyBy(optionTextMap[v].children, 'hash');
+              const option = optionTextMap[v];
+              const text = option?.text || v;
+              optionTextMap = keyBy(option?.children || [], 'hash');
               return text;
             })
             .join('-');

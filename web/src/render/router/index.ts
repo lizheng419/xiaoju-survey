@@ -29,7 +29,13 @@ const routes: RouteRecordRaw[] = [
   }
 ]
 // 兼容预览模式
-const base = window.location.pathname.includes('preview') ? 'management/preview' : 'render'
+const base = window.location.pathname.includes('preview')
+  ? import.meta.env.DEV
+    ? '/src/management/preview'
+    : 'management/preview'
+  : import.meta.env.DEV
+    ? '/src/render'
+    : 'render'
 const router = createRouter({
   history: createWebHistory(base),
   routes

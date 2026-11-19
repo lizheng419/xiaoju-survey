@@ -7,7 +7,7 @@
     }"
   >
     <div class="login-top">
-      <img src="/imgs/Logo.webp" alt="logo" />
+      <img src="/imgs/brand-logo.png" alt="logo" />
       <span>您好，请登录</span>
     </div>
     <div class="login-box">
@@ -268,6 +268,8 @@ const refreshCaptcha = async () => {
 
     img {
       width: 90px;
+      height: 48px;
+      object-fit: contain;
     }
   }
 

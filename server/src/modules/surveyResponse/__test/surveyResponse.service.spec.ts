@@ -72,9 +72,7 @@ describe('SurveyResponseService', () => {
   it('should get the total survey response count by path', async () => {
     const surveyPath = 'testPath';
     const count = 10;
-    jest
-      .spyOn(surveyResponseRepository, 'find')
-      .mockResolvedValue(new Array(10));
+    jest.spyOn(surveyResponseRepository, 'count').mockResolvedValue(10);
 
     const result = await service.getSurveyResponseTotalByPath(surveyPath);
 

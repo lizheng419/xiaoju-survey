@@ -178,7 +178,7 @@ const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-  history: createWebHistory('/management'),
+  history: createWebHistory(import.meta.env.DEV ? '/src/management' : '/management'),
   routes
 })
 
